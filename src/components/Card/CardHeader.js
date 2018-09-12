@@ -1,25 +1,35 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { string, func } from 'prop-types'
 import styled from 'styled-components'
+
+const StyledCardHeader = styled.div`
+    border-bottom: 1px solid ${props => props.theme.colors.orange};
+`
+
+const StyledCardIcon = styled.i`
+    cursor: pointer;
+    color: ${props => props.theme.colors.orange};
+`
 
 const StyledCardTitle = styled.h3`
     font-size: 1.6rem;
     font-weight: 400;
-    border-bottom: 1px solid ${props => props.theme.colors.orange};
-    padding: 0.9rem;
+    padding: 1rem;
 `
 
 export class CardHeader extends PureComponent {
     static propTypes = {
-        title: PropTypes.string.isRequired,
+        title: string.isRequired,
+        onCardDetail: func.isRequired,
     }
 
     render() {
         const { title } = this.props
         return (
-            <div className="flex justify-content-center">
+            <StyledCardHeader className="flex justify-content-between">
                 <StyledCardTitle>· {title} ·</StyledCardTitle>
-            </div>
+                <StyledCardIcon className="material-icons">keyboard_arrow_right</StyledCardIcon>
+            </StyledCardHeader>
         )
     }
 }

@@ -5,6 +5,6 @@ export const theme = {
     colors: {
         white: '#fff',
         grey: 'rgba(0, 0, 0, 0.54)',
-        orange: '#FFD600',
+        orange: '#FFC107',
     },
 }
