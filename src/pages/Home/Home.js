@@ -26,14 +26,15 @@ export class Home extends PureComponent {
     }
 
     render() {
+        const { history } = this.props
         const { articles } = this.state
-        console.log(this.state)
+
         return (
             <div className="flex justify-content-center flex-wrap">
                 <StyledHomeTitle>Consult our articles</StyledHomeTitle>
                 <StyledArticles className="flex justify-content-center flex-wrap">
                     {articles.map(article => (
-                        <Card item={article} key={article.id} onCardDetail={() => console.log('bah')} />
+                        <Card item={article} key={article.id} onCardDetail={() => history.push(`/${article.id}`)} />
                     ))}
                 </StyledArticles>
             </div>

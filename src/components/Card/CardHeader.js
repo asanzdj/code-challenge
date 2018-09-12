@@ -24,11 +24,14 @@ export class CardHeader extends PureComponent {
     }
 
     render() {
-        const { title } = this.props
+        const { title, onCardDetail } = this.props
+
         return (
             <StyledCardHeader className="flex justify-content-between">
                 <StyledCardTitle>· {title} ·</StyledCardTitle>
-                <StyledCardIcon className="material-icons">keyboard_arrow_right</StyledCardIcon>
+                <StyledCardIcon className="material-icons" onClick={onCardDetail}>
+                    keyboard_arrow_right
+                </StyledCardIcon>
             </StyledCardHeader>
         )
     }
