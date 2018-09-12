@@ -33,7 +33,7 @@ export class Home extends PureComponent {
                 <StyledHomeTitle>Consult our articles</StyledHomeTitle>
                 <StyledArticles className="flex justify-content-center flex-wrap">
                     {articles.map(article => (
-                        <Card item={article} key={article.id} />
+                        <Card item={article} key={article.id} onCardDetail={() => console.log('bah')} />
                     ))}
                 </StyledArticles>
             </div>

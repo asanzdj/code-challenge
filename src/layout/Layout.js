@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 
 import { Footer, Navbar } from 'components'
-import { Home } from 'pages'
+import Router from 'routes'
 import './Layout.css'
 
 export class Layout extends PureComponent {
@@ -10,7 +10,7 @@ export class Layout extends PureComponent {
             <div className="Layout">
                 <Navbar />
                 <div className="ContentWrapper">
-                    <Home />
+                    <Router />
                 </div>
                 <Footer />
             </div>

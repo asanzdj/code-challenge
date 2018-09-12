@@ -27,8 +27,8 @@ export class Card extends PureComponent {
         const { item, onCardDetail } = this.props
         return (
             <StyledCard>
-                <CardHeader title={item.title} />
-                <CardBody description={item.excerpt} onCardDetail={onCardDetail} />
+                <CardHeader title={item.title} onCardDetail={onCardDetail} />
+                <CardBody description={item.excerpt} />
                 <CardFooter author={item.author} id={item.id} />
             </StyledCard>
         )
