@@ -1,8 +1,13 @@
-import _ from 'lodash';
+import { times } from 'lodash';
 import Faker from 'faker';
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost/billin');
+mongoose.connect(
+  'mongodb://localhost/billin',
+  {
+    useMongoClient: true,
+  },
+);
 mongoose.set('debug', true);
 
 const Article = mongoose.model('Article', {
@@ -16,7 +21,7 @@ const Article = mongoose.model('Article', {
 
 Article.remove({}, (err) => {
   if (!err) {
-    _.times(10, () => {
+    times(10, () => {
       const content = `
 ${Faker.lorem.paragraphs()}
 ${Faker.lorem.paragraphs()}
