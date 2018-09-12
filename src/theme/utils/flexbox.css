@@ -1,0 +1,8 @@
+.flex {
+    display: flex;
+}
+
+/* Horizontal centering */
+.justify-content-center {
+    justify-content: center;
+}

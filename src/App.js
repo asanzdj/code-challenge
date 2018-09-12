@@ -1,32 +1,12 @@
-import React, { Component } from 'react';
-import request from './request';
-import { ARTICLES_QUERY } from './queries';
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
+// import request from './request'
+// import { ARTICLES_QUERY } from './queries'
+import { Layout } from './layout'
+import { theme } from 'theme/theme'
 
-class App extends Component {
-  // definition
-  constructor(props) {
-    super(props);
-    this.state = {
-      articles: [],
-    };
-  }
-
-  // lifecycle
-  componentWillMount() {
-    request(ARTICLES_QUERY).then(response => {
-      this.setState({ articles: response.data.articles });
-    });
-  }
-
-  // Renders
-  render() {
-    return (
-      <div className="App">
-        <h2>Billin code challenge</h2>
-        <pre>{JSON.stringify(this.state.articles, null, 2)}</pre>
-      </div>
-    );
-  }
-}
-
-export default App;
+export default () => (
+    <ThemeProvider theme={theme}>
+        <Layout />
+    </ThemeProvider>
+)
