@@ -1,11 +1,15 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
+import { Provider } from 'react-redux'
 
-import { Layout } from './layout'
+import store from 'store'
 import { theme } from 'theme/theme'
+import { Layout } from './layout'
 
 export default () => (
-    <ThemeProvider theme={theme}>
-        <Layout />
-    </ThemeProvider>
+    <Provider store={store}>
+        <ThemeProvider theme={theme}>
+            <Layout />
+        </ThemeProvider>
+    </Provider>
 )

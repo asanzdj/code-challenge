@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import request from 'request'
 import { ARTICLES_QUERY } from 'queries'
-import { Card } from '../../components/Card'
+import { Card } from 'components/Card'
 
 const StyledHomeTitle = styled.h1`
     font-size: 2.4rem;
@@ -12,8 +12,15 @@ const StyledHomeTitle = styled.h1`
     letter-spacing: 0.2rem;
     color: ${props => props.theme.primaryDark};
 `
-const StyledArticles = styled.div``
 
+@connect(
+    state => ({
+        articles: state.articles.articles,
+    }),
+    {
+        getArticles: ArticleActions.getArticles,
+    },
+)
 export class Home extends PureComponent {
     state = {
         articles: [],
@@ -32,11 +39,11 @@ export class Home extends PureComponent {
         return (
             <div className="flex justify-content-center flex-wrap">
                 <StyledHomeTitle>Consult our articles</StyledHomeTitle>
-                <StyledArticles className="flex justify-content-center flex-wrap">
+                <div className="flex justify-content-center flex-wrap">
                     {articles.map(article => (
                         <Card item={article} key={article.id} onCardDetail={() => history.push(`/${article.id}`)} />
                     ))}
-                </StyledArticles>
+                </div>
             </div>
         )
     }
