@@ -20,7 +20,7 @@ body {
 }
 
 .ContentWrapper {
-    min-height: 95%;
+    min-height: 90vh;
     width: 100%;
     flex-grow: 1;
 }
