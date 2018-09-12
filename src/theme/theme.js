@@ -4,5 +4,7 @@ export const theme = {
     secondary: '#09847A',
     colors: {
         white: '#fff',
+        grey: 'rgba(0, 0, 0, 0.54)',
+        orange: '#FFD600',
     },
 }

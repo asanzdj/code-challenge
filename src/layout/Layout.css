@@ -11,6 +11,7 @@ body {
     font-size: 10px;
     height: 100%;
     width: 100%;
+    font-weight: 400;
 }
 
 .Layout {
@@ -21,6 +22,7 @@ body {
 
 .ContentWrapper {
     min-height: 90vh;
+    padding: 1rem 2rem;
     width: 100%;
     flex-grow: 1;
 }
