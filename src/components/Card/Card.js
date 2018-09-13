@@ -9,7 +9,8 @@ import CardBody from './CardBody'
 const StyledCard = styled.div`
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
     padding: 1rem;
-    max-width: 28rem;
+    max-width: 33rem;
+    min-height: 37rem;
     margin: 1rem;
 `
 
@@ -26,7 +27,7 @@ export class Card extends PureComponent {
     render() {
         const { item, onCardDetail } = this.props
         return (
-            <StyledCard>
+            <StyledCard className="flex justify-content-between flex-column">
                 <CardHeader title={item.title} onCardDetail={onCardDetail} />
                 <CardBody description={item.excerpt} />
                 <CardFooter author={item.author} id={item.id} />

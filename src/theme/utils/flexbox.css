@@ -19,3 +19,8 @@
 .flex-wrap {
     flex-wrap: wrap;
 }
+
+/* Flex direction */
+.flex-column {
+    flex-direction: column;
+}
