@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled, { withTheme } from 'styled-components'
-import { flow } from 'lodash'
+import { flow, isEmpty } from 'lodash'
 
 import ArticleActions from 'store/redux/articles'
-import { Icon, Paper } from 'components'
+import { Icon, Paper, Tag } from 'components'
+import './ArticleDetail.css'
 
 const StyledPublication = styled.p`
     color: ${props => props.theme.colors.grey};
@@ -17,15 +18,16 @@ const StyledTitle = styled.h1`
     margin-top: 2rem;
     text-transform: uppercase;
 `
+const StyledSubtitle = styled.h3`
+    color: ${props => props.theme.colors.grey};
+    font-size: 1.5rem;
+    margin-top: 1rem;
+`
 const StyledContent = styled.p`
     color: ${props => props.theme.colors.greyDark};
     margin-top: 2rem;
-    font-size: 1.2rem;
-`
-const StyledFooter = styled.div`
-    color: ${props => props.theme.colors.greyDark};
-    margin-top: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
 `
 
 const mapStateToProps = state => ({
@@ -73,21 +75,34 @@ class ArticleDetail extends PureComponent {
         )
     }
 
+    renderTags = () => {
+        const { theme } = this.props
+
+        return (
+            <div className="flex justify-content-around flex-wrap">
+                {this.props.article.tags.map((tag, index) => (
+                    <Tag key={index} text={tag} background={theme.colors.teal300} color={theme.colors.white} marginRight="2rem" />
+                ))}
+            </div>
+        )
+    }
+
     render() {
         const { article } = this.props
 
-        return (
+        return !isEmpty(article) ? (
             <div className="flex justify-content-center">
-                <Paper padding="1rem 2rem" minWidth="70%" marginTop="2rem">
+                <Paper padding="1rem 2rem" margin="2rem 0" className="Article">
                     {this.renderPublishedFlag()}
                     <div>
                         <StyledTitle className="text-center">{article.title}</StyledTitle>
+                        <StyledSubtitle className="text-right">{article.author}</StyledSubtitle>
                         <StyledContent className="text-justify">{article.content}</StyledContent>
                     </div>
-                    <StyledFooter className="flex justify-content-between flex-wrap">dd</StyledFooter>
+                    {this.renderTags()}
                 </Paper>
             </div>
-        )
+        ) : null
     }
 }
 
@@ -99,8 +114,7 @@ export default flow(
     ),
 )(ArticleDetail)
 
-{
-    /* <div>
+/* <div>
                             <Icon color={theme.colors.indigo} marginRight="1rem" cursor="pointer">
                                 create
                             </Icon>
@@ -108,4 +122,3 @@ export default flow(
                                 delete_forever
                             </Icon>
                         </div> */
-}

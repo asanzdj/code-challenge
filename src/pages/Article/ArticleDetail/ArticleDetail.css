@@ -1,0 +1,15 @@
+@media (max-width: 667px) {
+    .Article {
+        width: 90%;
+    }
+}
+@media (min-width: 668px) {
+    .Article {
+        width: 70%;
+    }
+}
+@media (min-width: 1500px) {
+    .Article {
+        width: 60%;
+    }
+}

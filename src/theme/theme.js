@@ -9,6 +9,7 @@ export const theme = {
         orange: '#FFC107',
         red: '#D32F2F',
         indigo: '#1A237E',
+        teal300: '#4DB6AC',
         green: '#43A047',
     },
 }
