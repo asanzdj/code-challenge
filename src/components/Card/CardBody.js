@@ -10,7 +10,7 @@ const StyledCardBody = styled.h3`
     text-align: justify;
 `
 
-export class CardBody extends PureComponent {
+export default class CardBody extends PureComponent {
     static propTypes = {
         description: PropTypes.string.isRequired,
     }

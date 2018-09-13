@@ -5,6 +5,10 @@ export const theme = {
     colors: {
         white: '#fff',
         grey: 'rgba(0, 0, 0, 0.54)',
+        greyDark: '#263238',
         orange: '#FFC107',
+        red: '#D32F2F',
+        indigo: '#1A237E',
+        green: '#43A047',
     },
 }

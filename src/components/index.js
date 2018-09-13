@@ -1,3 +1,5 @@
 export * from './Footer'
 export * from './Navbar'
 export * from './Card'
+export * from './Icon'
+export * from './Paper'

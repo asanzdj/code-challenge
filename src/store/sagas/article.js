@@ -8,5 +8,7 @@ export function* getArticles(api) {
 }
 
 export function* getArticle(api, { id }) {
-    yield call()
+    const article = yield call(api.getArticle, id)
+
+    yield put(ArticleActions.setArticle(article))
 }

@@ -5,4 +5,15 @@ export const ARTICLES_QUERY = `{
     id
     title
   }
-}`;
+}`
+
+export const ARTICLE_QUERY = id => `{
+  article(id: "${id}") {
+    author
+    content
+    published
+    tags
+    id
+    title
+  }
+}`

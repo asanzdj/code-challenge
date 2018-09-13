@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
@@ -22,6 +23,17 @@ const mapStateToProps = state => ({
 })
 
 class Home extends PureComponent {
+    static propTypes = {
+        articles: PropTypes.arrayOf(
+            PropTypes.shape({
+                author: PropTypes.string,
+                excerpt: PropTypes.string,
+                id: PropTypes.string,
+                title: PropTypes.string,
+            }),
+        ),
+    }
+
     componentWillMount() {
         this.props.getArticles()
     }

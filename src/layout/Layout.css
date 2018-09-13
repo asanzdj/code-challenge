@@ -2,6 +2,7 @@
 @import '../theme/utils/flexbox.css';
 /* Fonts */
 @import '../theme/utils/fonts.css';
+@import '../theme/utils/texts.css';
 
 html,
 body {

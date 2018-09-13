@@ -1,14 +1,11 @@
 import React, { PureComponent } from 'react'
 import { string, func } from 'prop-types'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
+
+import { Icon } from 'components'
 
 const StyledCardHeader = styled.div`
     border-bottom: 1px solid ${props => props.theme.colors.orange};
-`
-
-const StyledCardIcon = styled.i`
-    cursor: pointer;
-    color: ${props => props.theme.colors.orange};
 `
 
 const StyledCardTitle = styled.h3`
@@ -17,22 +14,24 @@ const StyledCardTitle = styled.h3`
     padding: 1rem;
 `
 
-export class CardHeader extends PureComponent {
+class CardHeader extends PureComponent {
     static propTypes = {
         title: string.isRequired,
         onCardDetail: func.isRequired,
     }
 
     render() {
-        const { title, onCardDetail } = this.props
+        const { title, onCardDetail, theme } = this.props
 
         return (
             <StyledCardHeader className="flex justify-content-between">
                 <StyledCardTitle>· {title} ·</StyledCardTitle>
-                <StyledCardIcon className="material-icons" onClick={onCardDetail}>
+                <Icon className="material-icons" onClick={onCardDetail} color={theme.colors.orange} cursor="pointer">
                     keyboard_arrow_right
-                </StyledCardIcon>
+                </Icon>
             </StyledCardHeader>
         )
     }
 }
+
+export default withTheme(CardHeader)

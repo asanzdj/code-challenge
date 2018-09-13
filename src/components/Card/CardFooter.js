@@ -15,7 +15,7 @@ const StyledCardRef = styled.p`
     font-size: 0.9rem;
 `
 
-export class CardFooter extends PureComponent {
+export default class CardFooter extends PureComponent {
     static propTypes = {
         author: PropTypes.string,
         id: PropTypes.string.isRequired,
