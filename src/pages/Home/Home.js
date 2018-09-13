@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
-import request from 'request'
-import { ARTICLES_QUERY } from 'queries'
 import { Card } from 'components/Card'
+import ArticleActions from 'store/redux/articles'
 
 const StyledHomeTitle = styled.h1`
     font-size: 2.4rem;
@@ -13,28 +13,21 @@ const StyledHomeTitle = styled.h1`
     color: ${props => props.theme.primaryDark};
 `
 
-@connect(
-    state => ({
-        articles: state.articles.articles,
-    }),
-    {
-        getArticles: ArticleActions.getArticles,
-    },
-)
-export class Home extends PureComponent {
-    state = {
-        articles: [],
-    }
+const mapDispatchToProps = dispatch => ({
+    getArticles: () => dispatch(ArticleActions.getArticles()),
+})
 
+const mapStateToProps = state => ({
+    articles: state.articles.articles,
+})
+
+class Home extends PureComponent {
     componentWillMount() {
-        request(ARTICLES_QUERY).then(response => {
-            this.setState({ articles: response.data.articles })
-        })
+        this.props.getArticles()
     }
 
     render() {
-        const { history } = this.props
-        const { articles } = this.state
+        const { history, articles } = this.props
 
         return (
             <div className="flex justify-content-center flex-wrap">
@@ -48,3 +41,8 @@ export class Home extends PureComponent {
         )
     }
 }
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Home)

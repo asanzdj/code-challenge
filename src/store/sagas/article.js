@@ -1,11 +1,10 @@
 import { put, call } from 'redux-saga/effects'
+import ArticleActions from 'store/redux/articles'
 
 export function* getArticles(api) {
-    console.log('Entro')
-    console.log(api)
     const articles = yield call(api.getArticles)
 
-    console.log(articles)
+    yield put(ArticleActions.setArticles(articles))
 }
 
 export function* getArticle(api, { id }) {
