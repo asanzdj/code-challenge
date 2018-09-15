@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import Router from 'routes'
 import ModalActions from 'store/redux/modal'
-import { Footer, Navbar, Spinner, Modal } from 'components'
+import { Footer, Navbar, Spinner, Modal, ModalBody, ModalFooter, Button } from 'components'
 import './Layout.css'
 
 const StyledLayout = styled.div`
@@ -18,8 +18,9 @@ const StyledContentWrapper = styled.div`
 `
 
 const mapStateToProps = state => ({
-    loading: state.global.loading,
+    error: state.global.error,
     isModalOpen: state.modal.isOpen,
+    loading: state.global.loading,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -28,12 +29,21 @@ const mapDispatchToProps = dispatch => ({
 
 export class Layout extends PureComponent {
     render() {
-        const { loading, isModalOpen, closeModal } = this.props
+        const { loading, isModalOpen, closeModal, error } = this.props
 
         return (
             <StyledLayout className="flex flex-wrap">
                 <Spinner active={loading} />
-                {/* {error && <Modal isOpen={isModalOpen} onClose={closeModal} />} */}
+                {error && (
+                    <Modal isOpen={isModalOpen} onClose={closeModal} title={error.title}>
+                        <ModalBody>
+                            <p>{error.text}</p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button onClick={closeModal}>Accept</Button>
+                        </ModalFooter>
+                    </Modal>
+                )}
                 <Modal isOpen={isModalOpen} onClose={closeModal} />
                 <Navbar />
                 <StyledContentWrapper className="ContentWrapper">

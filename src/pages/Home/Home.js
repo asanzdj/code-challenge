@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { Card } from 'components/Card'
+import { Card } from 'components'
 import ArticleActions from 'store/redux/articles'
 
 const StyledHomeTitle = styled.h1`
