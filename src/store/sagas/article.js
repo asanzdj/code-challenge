@@ -1,6 +1,6 @@
 import ERRORS from 'utils/errors'
 import { put, call } from 'redux-saga/effects'
-import { history } from 'routes'
+import { push } from 'connected-react-router'
 
 import ArticleActions from 'store/redux/articles'
 import GlobalActions from 'store/redux/global'
@@ -32,7 +32,7 @@ export function* getArticle(api, { id }) {
         yield put(ArticleActions.setArticle(article))
     } else {
         yield put(GlobalActions.setError(ERRORS.GET_ARTICLE))
-        yield call(history.push, '/')
+        yield put(push('/'))
     }
 
     yield put(GlobalActions.hideLoading())
@@ -45,7 +45,7 @@ export function* deleteArticle(api, { id }) {
     const article = yield call(api.deleteArticle, id)
 
     if (article) {
-        yield call(history.push, '/')
+        yield put(push('/'))
     } else {
         yield put(GlobalActions.setError(ERRORS.DELETE_ARTICLE))
     }

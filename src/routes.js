@@ -1,16 +1,15 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import { Switch, Route } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
 
 import { Home, ArticleDetail } from 'pages'
-
-export const history = createBrowserHistory()
+import { history } from 'store'
 
 export default () => (
-    <BrowserRouter history={history}>
+    <ConnectedRouter history={history}>
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/:id" component={ArticleDetail} />
         </Switch>
-    </BrowserRouter>
+    </ConnectedRouter>
 )
