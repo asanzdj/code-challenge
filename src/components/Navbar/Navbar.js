@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { func } from 'prop-types'
 import styled from 'styled-components'
 
 const StyledNavbar = styled.div`
@@ -20,11 +21,16 @@ const Logo = styled.div`
 `
 
 export class Navbar extends PureComponent {
+    static propTypes = {
+        navigate: func.isRequired,
+    }
+
     render() {
+        const { navigate } = this.props
         return (
             <StyledNavbar className="flex justify-content-between align-items-center">
                 <Logo className="flex justify-content-center align-items-center">
-                    <h1>A</h1>
+                    <h1 onClick={() => navigate('/')}>A</h1>
                 </Logo>
             </StyledNavbar>
         )

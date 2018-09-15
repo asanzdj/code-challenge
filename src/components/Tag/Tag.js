@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { string, func, bool } from 'prop-types'
 import styled, { withTheme } from 'styled-components'
 
 import { Icon } from 'components'
@@ -14,12 +14,12 @@ const StyledTag = styled.div`
 
 class Tag extends PureComponent {
     static propTypes = {
-        text: PropTypes.string.isRequired,
-        background: PropTypes.string,
-        color: PropTypes.string,
-        removable: PropTypes.bool,
-        onRemove: PropTypes.func,
-        marginRight: PropTypes.string,
+        text: string.isRequired,
+        background: string,
+        color: string,
+        removable: bool,
+        onRemove: func,
+        marginRight: string,
     }
 
     static defaultProps = {

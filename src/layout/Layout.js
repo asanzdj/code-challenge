@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
+import { bool, func, string } from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { push } from 'connected-react-router'
 
 import Router from 'routes'
 import ModalActions from 'store/redux/modal'
@@ -27,11 +29,21 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     closeModal: () => dispatch(ModalActions.hideModal()),
     cleanError: () => dispatch(GlobalActions.cleanError()),
+    navigate: path => dispatch(push(path)),
 })
 
 export class Layout extends PureComponent {
+    static propTypes = {
+        navigate: func,
+        cleanError: func,
+        closeModal: func,
+        error: string,
+        isModalOpen: bool,
+        loading: bool,
+    }
+
     render() {
-        const { loading, isModalOpen, closeModal, error, cleanError } = this.props
+        const { loading, isModalOpen, closeModal, error, cleanError, navigate } = this.props
 
         return (
             <StyledLayout className="flex flex-wrap">
@@ -47,7 +59,7 @@ export class Layout extends PureComponent {
                     </Modal>
                 )}
                 <Modal isOpen={isModalOpen} onClose={closeModal} />
-                <Navbar />
+                <Navbar navigate={navigate} />
                 <StyledContentWrapper className="ContentWrapper">
                     <Router />
                 </StyledContentWrapper>

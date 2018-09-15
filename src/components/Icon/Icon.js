@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { string } from 'prop-types'
 import styled from 'styled-components'
 
 const StyledIcon = styled.i`
@@ -15,14 +15,14 @@ const StyledIcon = styled.i`
 
 export class Icon extends PureComponent {
     static propTypes = {
-        color: PropTypes.string,
-        cursor: PropTypes.string,
-        size: PropTypes.string,
-        margin: PropTypes.string,
-        marginTop: PropTypes.string,
-        marginLeft: PropTypes.string,
-        marginBottom: PropTypes.string,
-        marginRight: PropTypes.string,
+        color: string,
+        cursor: string,
+        size: string,
+        margin: string,
+        marginTop: string,
+        marginLeft: string,
+        marginBottom: string,
+        marginRight: string,
     }
 
     render() {

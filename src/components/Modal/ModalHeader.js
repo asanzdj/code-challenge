@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { string } from 'prop-types'
 import styled from 'styled-components'
 
 const StyledModalHeader = styled.div`
@@ -11,7 +11,7 @@ const StyledModalTitle = styled.h2`
 
 export class ModalHeader extends PureComponent {
     static propTypes = {
-        title: PropTypes.string.isRequired,
+        title: string.isRequired,
     }
 
     render() {

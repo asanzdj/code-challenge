@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { oneOf, string, bool, any } from 'prop-types'
 import styled from 'styled-components'
 
 import { Icon } from 'components'
@@ -13,14 +13,14 @@ const StyledButton = styled(Button)`
 
 export class IconButton extends PureComponent {
     static propTypes = {
-        children: PropTypes.any.isRequired,
-        color: PropTypes.oneOf(['primary', 'secondary', 'orange', 'teal300', 'greyDark']),
-        height: PropTypes.string,
-        margin: PropTypes.string,
-        marginLeft: PropTypes.string,
-        marginRight: PropTypes.string,
-        outline: PropTypes.bool,
-        width: PropTypes.string,
+        children: any.isRequired,
+        color: oneOf(['primary', 'secondary', 'orange', 'teal300', 'greyDark']),
+        height: string,
+        margin: string,
+        marginLeft: string,
+        marginRight: string,
+        outline: bool,
+        width: string,
     }
 
     static defaultProps = {

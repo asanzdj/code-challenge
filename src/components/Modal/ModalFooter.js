@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { any } from 'prop-types'
 import styled from 'styled-components'
 
 const StyledModalBody = styled.div`
@@ -10,7 +10,7 @@ const StyledModalBody = styled.div`
 
 export class ModalFooter extends PureComponent {
     static propTypes = {
-        children: PropTypes.any.isRequired,
+        children: any.isRequired,
     }
 
     render() {

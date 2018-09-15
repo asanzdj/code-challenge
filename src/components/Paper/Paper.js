@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { string } from 'prop-types'
 import styled from 'styled-components'
 
 const StyledPaper = styled.div`
@@ -16,7 +16,7 @@ const StyledPaper = styled.div`
 
 export class Paper extends PureComponent {
     static propTypes = {
-        padding: PropTypes.string,
+        padding: string,
     }
 
     render() {

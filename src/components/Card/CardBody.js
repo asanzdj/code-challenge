@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { string } from 'prop-types'
 import styled from 'styled-components'
 
 const StyledCardBody = styled.h3`
@@ -12,7 +12,7 @@ const StyledCardBody = styled.h3`
 
 export default class CardBody extends PureComponent {
     static propTypes = {
-        description: PropTypes.string.isRequired,
+        description: string.isRequired,
     }
 
     render() {

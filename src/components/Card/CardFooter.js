@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { string } from 'prop-types'
 import styled from 'styled-components'
 
 const StyledCardFooter = styled.div`
@@ -17,8 +17,8 @@ const StyledCardRef = styled.p`
 
 export default class CardFooter extends PureComponent {
     static propTypes = {
-        author: PropTypes.string,
-        id: PropTypes.string.isRequired,
+        author: string,
+        id: string.isRequired,
     }
 
     render() {

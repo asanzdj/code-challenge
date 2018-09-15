@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { bool, string, func, any } from 'prop-types'
 import styled, { withTheme } from 'styled-components'
 
 import { ModalHeader } from './ModalHeader'
@@ -26,10 +26,10 @@ const StyledModal = styled.div`
 
 class Modal extends PureComponent {
     static propTypes = {
-        isOpen: PropTypes.bool.isRequired,
-        title: PropTypes.string,
-        onClose: PropTypes.func,
-        children: PropTypes.any,
+        isOpen: bool.isRequired,
+        title: string,
+        onClose: func,
+        children: any,
     }
 
     render() {

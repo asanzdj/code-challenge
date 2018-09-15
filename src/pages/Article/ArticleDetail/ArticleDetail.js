@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { string, array, bool, shape } from 'prop-types'
 import { connect } from 'react-redux'
 import styled, { withTheme } from 'styled-components'
 import { flow, isEmpty } from 'lodash'
@@ -43,13 +43,13 @@ const mapDispatchToProps = dispatch => ({
 
 class ArticleDetail extends PureComponent {
     static propTypes = {
-        article: PropTypes.shape({
-            author: PropTypes.string,
-            content: PropTypes.string,
-            id: PropTypes.string,
-            published: PropTypes.bool,
-            tags: PropTypes.array,
-            title: PropTypes.string,
+        article: shape({
+            author: string,
+            content: string,
+            id: string,
+            published: bool,
+            tags: array,
+            title: string,
         }),
     }
 
