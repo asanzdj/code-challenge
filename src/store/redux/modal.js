@@ -20,8 +20,8 @@ export const ModalTypes = Types
 // Reducers and Handlers
 export const handlers = {
     [Types.CLEAN]: () => ({ ...initialState }),
-    [Types.SHOW_MODAL]: (state = initialState) => ({ ...state, modal: true }),
-    [Types.HIDE_MODAL]: (state = initialState) => ({ ...state, modal: false }),
+    [Types.SHOW_MODAL]: (state = initialState) => ({ ...state, isOpen: true }),
+    [Types.HIDE_MODAL]: (state = initialState) => ({ ...state, isOpen: false }),
 }
 
 export const reducer = createReducer(initialState, handlers)

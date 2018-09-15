@@ -15,6 +15,7 @@ const { Types, Creators } = createActions(
         // Errors
         setError: ['error'],
         cleanError: null,
+        showError: ['key'],
     },
     {
         prefix: 'GLOBAL_',

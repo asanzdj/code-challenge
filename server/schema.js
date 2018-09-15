@@ -37,7 +37,8 @@ const Query = new GraphQLObjectType({
     articles: {
       type: new GraphQLList(articleType),
       resolve() {
-        return db.Article.find();
+        const articles = db.Article.find();
+        return articles || null;
       },
     },
     article: {
@@ -48,7 +49,8 @@ const Query = new GraphQLObjectType({
         },
       },
       resolve(root, args) {
-        return db.Article.findById(args.id);
+        const article = db.Article.findById(args.id);
+        return article || null;
       },
     },
   }),
