@@ -3,6 +3,7 @@ import { oneOfType, string, number, func } from 'prop-types'
 import styled from 'styled-components'
 
 import { Label } from './Label'
+import { ErrorMessage } from './ErrorMessage'
 
 const StyledInput = styled.input`
     width: 100%;
@@ -19,6 +20,7 @@ export class TextField extends PureComponent {
         type: string,
         onChange: func.isRequired,
         value: oneOfType([string, number]).isRequired,
+        error: string,
     }
 
     static defaultProps = {
@@ -26,12 +28,13 @@ export class TextField extends PureComponent {
     }
 
     render() {
-        const { label, ...otherProps } = this.props
+        const { label, error, ...otherProps } = this.props
 
         return (
             <div>
                 {label && <Label>{label}</Label>}
                 <StyledInput {...otherProps} type="text" />
+                {error && <ErrorMessage text={error} />}
             </div>
         )
     }

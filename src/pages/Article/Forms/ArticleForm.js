@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { string, array, bool, shape } from 'prop-types'
 import styled from 'styled-components'
-import { filter } from 'lodash'
+import { filter, omit, isEmpty } from 'lodash'
 
 import { TextField, TextAreaField, CheckboxField, TagsField, Button } from 'components'
 
@@ -35,8 +35,9 @@ export class ArticleForm extends PureComponent {
         author: '',
         content: '',
         published: false,
-        tags: [],
+        tags: null,
         title: '',
+        errors: {},
     }
 
     componentWillReceiveProps({ article }) {
@@ -64,13 +65,37 @@ export class ArticleForm extends PureComponent {
         this.setState({ tags: newTags })
     }
 
+    validateForm = () => {
+        const requiredFields = ['title', 'author', 'content']
+        let errors = {}
+
+        /* eslint-disable */
+        requiredFields.map(field => {
+            if (this.state[field] === '') {
+                errors = { ...errors, [field]: 'Required field' }
+            }
+        })
+        /* eslint-enable */
+        this.setState({ errors })
+        return errors
+    }
+
+    cleanErrors = () => {
+        this.setState({ errors: {} })
+    }
+
     handleSubmit = e => {
         e.preventDefault()
-        this.props.onSubmit(this.state)
+
+        const errors = this.validateForm()
+
+        if (isEmpty(errors)) {
+            this.props.onSubmit(omit(this.state, 'errors'))
+        }
     }
 
     render() {
-        const { title, author, content, published, tags } = this.state
+        const { title, author, content, published, tags, errors } = this.state
         const { formTitle } = this.props
 
         return (
@@ -78,9 +103,9 @@ export class ArticleForm extends PureComponent {
                 {formTitle && <StyledFormTitle className="text-center">{formTitle}</StyledFormTitle>}
 
                 <form>
-                    <TextField label="Title:" value={title} id="title" name="title" onChange={e => this.handleFieldChange(e, 'title')} />
-                    <TextField label="Author:" value={author} id="author" name="author" onChange={e => this.handleFieldChange(e, 'author')} />
-                    <TextAreaField label="Content:" value={content} id="content" name="content" onChange={e => this.handleFieldChange(e, 'content')} />
+                    <TextField label="Title:" value={title} id="title" name="title" onChange={e => this.handleFieldChange(e, 'title')} error={errors['title']} />
+                    <TextField label="Author:" value={author} id="author" name="author" onChange={e => this.handleFieldChange(e, 'author')} error={errors['author']} />
+                    <TextAreaField label="Content:" value={content} id="content" name="content" onChange={e => this.handleFieldChange(e, 'content')} error={errors['content']} />
                     <CheckboxField label="Is published?" value={published} id="published" name="published" onChange={this.handleCheckboxChange} />
                     <TagsField label="Tags:" id="tags" name="tags" tags={tags} onRemove={this.handleRemoveTag} onAddTag={this.handleAddTag} />
 

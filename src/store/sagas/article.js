@@ -67,3 +67,18 @@ export function* createArticle(api, { fields }) {
 
     yield put(GlobalActions.hideLoading())
 }
+
+export function* updateArticle(api, { fields }) {
+    yield put(GlobalActions.showLoading())
+
+    yield delay(500)
+    const article = yield call(api.updateArticle, fields)
+
+    if (article) {
+        yield put(push(`/articles/view/${article.id}`))
+    } else {
+        yield put(GlobalActions.setError(ERRORS.UPDATE_ARTICLE))
+    }
+
+    yield put(GlobalActions.hideLoading())
+}

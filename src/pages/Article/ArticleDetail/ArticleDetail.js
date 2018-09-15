@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled, { withTheme } from 'styled-components'
 import { flow, isEmpty } from 'lodash'
+import { push } from 'connected-react-router'
 
 import ArticleActions from 'store/redux/articles'
 import { Icon, Paper, Tag, Modal, ModalBody, ModalFooter, Button } from 'components'
@@ -37,6 +38,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getArticle: id => dispatch(ArticleActions.getArticle(id)),
     onDeleteArticle: id => dispatch(ArticleActions.deleteArticle(id)),
+    navigate: path => dispatch(push(path)),
 })
 
 class ArticleDetail extends PureComponent {
@@ -94,20 +96,30 @@ class ArticleDetail extends PureComponent {
 
         return (
             <div className="flex justify-content-around flex-wrap">
-                {this.props.article.tags.map((tag, index) => (
-                    <Tag key={index} text={tag} background={theme.colors.teal300} color={theme.colors.white} marginRight="2rem" />
-                ))}
+                {this.props.article.tags.map(
+                    (tag, index) =>
+                        tag && tag !== null && tag !== 'null' && tag !== 'undefined' ? (
+                            <Tag key={index} text={tag} background={theme.colors.teal300} color={theme.colors.white} marginRight="2rem" />
+                        ) : null,
+                )}
             </div>
         )
     }
 
-    renderActionsHeader = () => (
-        <div>
-            <Icon color={this.props.theme.colors.red} cursor="pointer" onClick={this.openDeleteModal}>
-                delete_forever
-            </Icon>
-        </div>
-    )
+    renderActionsHeader = () => {
+        const { navigate, theme } = this.props
+
+        return (
+            <div>
+                <Icon color={theme.colors.indigo} marginRight="1rem" cursor="pointer" onClick={() => navigate(`/articles/edit/${this.articleId}`)}>
+                    create
+                </Icon>
+                <Icon color={theme.colors.red} cursor="pointer" onClick={this.openDeleteModal}>
+                    delete_forever
+                </Icon>
+            </div>
+        )
+    }
 
     renderDeleteModal = () => {
         const { onDeleteArticle } = this.props
@@ -163,12 +175,3 @@ export default flow(
         mapDispatchToProps,
     ),
 )(ArticleDetail)
-
-/* <div>
-                            <Icon color={theme.colors.indigo} marginRight="1rem" cursor="pointer">
-                                create
-                            </Icon>
-                            <Icon color={theme.colors.red} cursor="pointer">
-                                delete_forever
-                            </Icon>
-                        </div> */

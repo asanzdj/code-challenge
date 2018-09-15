@@ -1,7 +1,7 @@
 import { takeLatest, all } from 'redux-saga/effects'
 
 import api from 'Api'
-import { getArticles, getArticle, deleteArticle, createArticle } from './article'
+import { getArticles, getArticle, deleteArticle, createArticle, updateArticle } from './article'
 import { ArticleTypes } from 'store/redux/articles'
 
 export default function* rootSaga() {
@@ -10,5 +10,6 @@ export default function* rootSaga() {
         yield takeLatest(ArticleTypes.GET_ARTICLE, getArticle, api),
         yield takeLatest(ArticleTypes.DELETE_ARTICLE, deleteArticle, api),
         yield takeLatest(ArticleTypes.CREATE_ARTICLE, createArticle, api),
+        yield takeLatest(ArticleTypes.UPDATE_ARTICLE, updateArticle, api),
     ])
 }

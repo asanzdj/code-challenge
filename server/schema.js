@@ -101,6 +101,20 @@ const Mutation = new GraphQLObjectType({
         return db.Article.create({ ...args });
       },
     },
+    updateArticle: {
+      type: articleType,
+      args: {
+        ...articleArgs,
+        id: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+      },
+      resolve(root, args) {
+        // Returns the article updated is it's found
+        // It is needed to check is id exists
+        return Types.ObjectId.isValid(args.id) ? db.Article.findByIdAndUpdate(args.id, args, { new: true }) : null;
+      },
+    },
   }),
 });
 

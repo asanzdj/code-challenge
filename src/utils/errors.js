@@ -15,4 +15,8 @@ export default {
         title: 'Ooppps... Something went wrong',
         text: 'An error has ocurred while creating the article. Please, try it later.',
     },
+    UPDATE_ARTICLE: {
+        title: 'Ooppps... Something went wrong',
+        text: 'An error has ocurred while editing the article. Please, try it later.',
+    },
 }
