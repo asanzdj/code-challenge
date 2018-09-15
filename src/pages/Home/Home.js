@@ -48,7 +48,7 @@ class Home extends PureComponent {
     }
 
     render() {
-        const { history, articles, navigate } = this.props
+        const { articles, navigate } = this.props
 
         return (
             <div className="flex justify-content-center flex-wrap">

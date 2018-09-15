@@ -27,14 +27,16 @@ class Tag extends PureComponent {
     }
 
     render() {
-        const { text, removable, onRemove, theme } = this.props
+        const { text, removable, onRemove } = this.props
 
         return (
             <StyledTag className="flex justify-content-between align-items-center">
                 <span>{text}</span>
-                <Icon size="1.3rem" cursor="pointer">
-                    close
-                </Icon>
+                {removable && (
+                    <Icon size="1.3rem" cursor="pointer" onClick={() => onRemove(text)}>
+                        close
+                    </Icon>
+                )}
             </StyledTag>
         )
     }
