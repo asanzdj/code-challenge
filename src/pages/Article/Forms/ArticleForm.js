@@ -35,7 +35,7 @@ export class ArticleForm extends PureComponent {
         author: '',
         content: '',
         published: false,
-        tags: null,
+        tags: [],
         title: '',
         errors: {},
     }

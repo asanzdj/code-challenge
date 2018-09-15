@@ -10,8 +10,6 @@ const mapDispatchToProps = dispatch => ({
 
 class ArticleCreation extends PureComponent {
     handleSubmitForm = fields => {
-        // if
-        // console.log(fields)
         const excerpt = fields.content.substring(0, 300)
         this.props.createArticle({ ...fields, excerpt })
     }
