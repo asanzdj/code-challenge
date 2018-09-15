@@ -5,7 +5,7 @@ import styled, { withTheme } from 'styled-components'
 import { flow, isEmpty } from 'lodash'
 
 import ArticleActions from 'store/redux/articles'
-import { Icon, Paper, Tag } from 'components'
+import { Icon, Paper, Tag, Modal, ModalBody, ModalFooter, Button } from 'components'
 import './ArticleDetail.css'
 
 const StyledPublication = styled.p`
@@ -36,6 +36,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getArticle: id => dispatch(ArticleActions.getArticle(id)),
+    onDeleteArticle: id => dispatch(ArticleActions.deleteArticle(id)),
 })
 
 class ArticleDetail extends PureComponent {
@@ -50,13 +51,26 @@ class ArticleDetail extends PureComponent {
         }),
     }
 
+    state = {
+        isDeleteModalOpen: false,
+    }
+
     componentWillMount() {
         const { match, getArticle } = this.props
 
-        getArticle(match.params.id)
+        this.articleId = match.params.id
+
+        getArticle(this.articleId)
     }
 
     isPublished = () => this.props.article.published
+
+    closeDeleteModal = () => {
+        this.setState({ isDeleteModalOpen: false })
+    }
+    openDeleteModal = () => {
+        this.setState({ isDeleteModalOpen: true })
+    }
 
     renderPublishedFlag = () => {
         const { theme } = this.props
@@ -87,12 +101,48 @@ class ArticleDetail extends PureComponent {
         )
     }
 
+    renderActionsHeader = () => (
+        <div>
+            <Icon color={this.props.theme.colors.red} cursor="pointer" onClick={this.openDeleteModal}>
+                delete_forever
+            </Icon>
+        </div>
+    )
+
+    renderDeleteModal = () => {
+        const { onDeleteArticle } = this.props
+        const { isDeleteModalOpen } = this.state
+
+        return (
+            <Modal isOpen={isDeleteModalOpen} title="Are your sure you want to delele this article?" onClose={this.closeDeleteModal}>
+                <ModalBody>
+                    <p>This change is permanent and it can't be undone.</p>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="greyDark" marginRight="2rem" onClick={this.closeDeleteModal}>
+                        No
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            this.closeDeleteModal()
+                            onDeleteArticle(this.articleId)
+                        }}
+                    >
+                        Yes
+                    </Button>
+                </ModalFooter>
+            </Modal>
+        )
+    }
+
     render() {
         const { article } = this.props
 
         return !isEmpty(article) ? (
             <div className="flex justify-content-center">
+                {this.renderDeleteModal()}
                 <Paper padding="1rem 2rem" margin="2rem 0" className="Article">
+                    {this.renderActionsHeader()}
                     {this.renderPublishedFlag()}
                     <div>
                         <StyledTitle className="text-center">{article.title}</StyledTitle>

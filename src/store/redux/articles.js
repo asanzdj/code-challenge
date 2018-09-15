@@ -14,6 +14,7 @@ const { Types, Creators } = createActions(
         //Async
         getArticles: null,
         getArticle: ['id'],
+        deleteArticle: ['id'],
     },
     {
         prefix: 'ARTICLES_',

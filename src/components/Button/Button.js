@@ -13,6 +13,9 @@ const StyledButton = styled.button`
     height: 35px;
     letter-spacing: 0.8px;
     line-height: 35px;
+    margin-left: ${props => props.marginLeft};
+    margin-right: ${props => props.marginRight};
+    margin: ${props => props.margin};
     outline: none;
     padding: 0 1.5rem;
     text-align: center;
@@ -23,7 +26,10 @@ const StyledButton = styled.button`
 export class Button extends PureComponent {
     static propTypes = {
         children: PropTypes.any.isRequired,
-        color: PropTypes.oneOf(['primary', 'secondary', 'orange', 'teal300']),
+        color: PropTypes.oneOf(['primary', 'secondary', 'orange', 'teal300', 'greyDark']),
+        margin: PropTypes.string,
+        marginLeft: PropTypes.string,
+        marginRight: PropTypes.string,
         outline: PropTypes.bool,
     }
 

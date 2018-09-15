@@ -1,4 +1,5 @@
 import { GraphQLBoolean, GraphQLObjectType, GraphQLString, GraphQLList, GraphQLSchema, GraphQLNonNull } from 'graphql';
+import { Types } from 'mongoose';
 
 import db from './db';
 
@@ -55,9 +56,29 @@ const Query = new GraphQLObjectType({
     },
   }),
 });
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  description: 'The root mutation',
+  fields: () => ({
+    deleteArticle: {
+      type: articleType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+      },
+      resolve(root, { id }) {
+        // Returns the article deleted is it's found
+        // It is needed to check is id exists
+        return Types.ObjectId.isValid(id) ? db.Article.findByIdAndRemove(id) : null;
+      },
+    },
+  }),
+});
 
 const Schema = new GraphQLSchema({
   query: Query,
+  mutation: Mutation,
 });
 
 export default Schema;
