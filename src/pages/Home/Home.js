@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { Card } from 'components'
+import { Card, IconButton } from 'components'
 import ArticleActions from 'store/redux/articles'
 
 const StyledHomeTitle = styled.h1`
@@ -12,6 +12,12 @@ const StyledHomeTitle = styled.h1`
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     color: ${props => props.theme.primaryDark};
+`
+
+const StyledFloatedButton = styled.div`
+    bottom: 2rem;
+    position: fixed;
+    right: 1rem;
 `
 
 const mapDispatchToProps = dispatch => ({
@@ -49,6 +55,9 @@ class Home extends PureComponent {
                         <Card item={article} key={article.id} onCardDetail={() => history.push(`/${article.id}`)} />
                     ))}
                 </div>
+                <StyledFloatedButton>
+                    <IconButton>add</IconButton>
+                </StyledFloatedButton>
             </div>
         )
     }
