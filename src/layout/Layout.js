@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-
-import { Footer, Navbar, Spinner } from 'components'
-import Router from 'routes'
-import './Layout.css'
 import styled from 'styled-components'
+
+import Router from 'routes'
+import ModalActions from 'store/redux/modal'
+import { Footer, Navbar, Spinner, Modal } from 'components'
+import './Layout.css'
 
 const StyledLayout = styled.div`
     height: 100vh;
@@ -18,15 +19,22 @@ const StyledContentWrapper = styled.div`
 
 const mapStateToProps = state => ({
     loading: state.global.loading,
+    isModalOpen: state.modal.isOpen,
+})
+
+const mapDispatchToProps = dispatch => ({
+    closeModal: () => dispatch(ModalActions.hideModal()),
 })
 
 export class Layout extends PureComponent {
     render() {
-        const { loading } = this.props
+        const { loading, isModalOpen, closeModal } = this.props
 
         return (
             <StyledLayout className="flex flex-wrap">
                 <Spinner active={loading} />
+                {/* {error && <Modal isOpen={isModalOpen} onClose={closeModal} />} */}
+                <Modal isOpen={isModalOpen} onClose={closeModal} />
                 <Navbar />
                 <StyledContentWrapper className="ContentWrapper">
                     <Router />
@@ -39,5 +47,5 @@ export class Layout extends PureComponent {
 
 export default connect(
     mapStateToProps,
-    null,
+    mapDispatchToProps,
 )(Layout)

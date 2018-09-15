@@ -26,8 +26,9 @@ export class Icon extends PureComponent {
     }
 
     render() {
+        const { className, ...otherProps } = this.props
         return (
-            <StyledIcon className="material-icons" {...this.props}>
+            <StyledIcon className={`material-icons ${className}`} {...otherProps}>
                 {this.props.children}
             </StyledIcon>
         )
