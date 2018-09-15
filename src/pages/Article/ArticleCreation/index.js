@@ -1,1 +1,1 @@
-export * from './ArticleCreation'
+export { default as ArticleCreation } from './ArticleCreation'

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Label } from './Label'
 
 const StyledInput = styled.input`
+    width: 100%;
     &:focus {
         outline-offset: -2px;
         outline: ${props => props.theme.primary} auto 0.5rem;

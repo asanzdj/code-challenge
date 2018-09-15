@@ -15,6 +15,7 @@ const { Types, Creators } = createActions(
         getArticles: null,
         getArticle: ['id'],
         deleteArticle: ['id'],
+        createArticle: ['fields'],
     },
     {
         prefix: 'ARTICLES_',

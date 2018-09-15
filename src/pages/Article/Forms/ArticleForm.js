@@ -3,10 +3,19 @@ import { string, array, bool, shape } from 'prop-types'
 import styled from 'styled-components'
 import { filter } from 'lodash'
 
-import { TextField, TextAreaField, CheckboxField, TagsField } from 'components'
-import { Button } from '../../../components/Button/Button'
+import { TextField, TextAreaField, CheckboxField, TagsField, Button } from 'components'
 
 const StyledFormWrapper = styled.div`
+    width: 100%;
+
+    form {
+        min-width: 50rem;
+    }
+`
+
+const StyledFormTitle = styled.h1`
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
     width: 100%;
 `
 
@@ -19,6 +28,7 @@ export class ArticleForm extends PureComponent {
             tags: array,
             title: string,
         }),
+        formTitle: string,
     }
 
     state = {
@@ -35,8 +45,14 @@ export class ArticleForm extends PureComponent {
         }
     }
 
-    handleFieldChange = (value, key) => {
-        this.setState({ [key]: value })
+    handleFieldChange = (e, key) => {
+        e.preventDefault()
+
+        this.setState({ [key]: e.target.value })
+    }
+
+    handleCheckboxChange = () => {
+        this.setState({ published: !this.state.published })
     }
 
     handleAddTag = tag => {
@@ -55,18 +71,21 @@ export class ArticleForm extends PureComponent {
 
     render() {
         const { title, author, content, published, tags } = this.state
+        const { formTitle } = this.props
 
         return (
-            <StyledFormWrapper className="flex justify-content-center">
-                <form onSubmit={this.handleSubmit}>
-                    <TextField label="Title:" value={title} id="title" name="title" onChange={e => this.handleFieldChange(e.target.value, 'title')} />
-                    <TextField label="Author:" value={author} id="author" name="author" onChange={e => this.handleFieldChange(e.target.value, 'author')} />
-                    <TextAreaField label="Content:" value={content} id="content" name="content" onChange={e => this.handleFieldChange(e.target.value, 'content')} />
-                    <CheckboxField label="Is published?" value={published} id="published" name="published" onChange={() => this.handleFieldChange(!published, 'published')} />
+            <StyledFormWrapper className="flex justify-content-center flex-wrap">
+                {formTitle && <StyledFormTitle className="text-center">{formTitle}</StyledFormTitle>}
+
+                <form>
+                    <TextField label="Title:" value={title} id="title" name="title" onChange={e => this.handleFieldChange(e, 'title')} />
+                    <TextField label="Author:" value={author} id="author" name="author" onChange={e => this.handleFieldChange(e, 'author')} />
+                    <TextAreaField label="Content:" value={content} id="content" name="content" onChange={e => this.handleFieldChange(e, 'content')} />
+                    <CheckboxField label="Is published?" value={published} id="published" name="published" onChange={this.handleCheckboxChange} />
                     <TagsField label="Tags:" id="tags" name="tags" tags={tags} onRemove={this.handleRemoveTag} onAddTag={this.handleAddTag} />
 
                     <div className="flex justify-content-end">
-                        <Button type="submit" color="secondary">
+                        <Button color="secondary" onClick={this.handleSubmit}>
                             Send
                         </Button>
                     </div>

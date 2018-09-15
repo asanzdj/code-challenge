@@ -1,21 +1,27 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import { connect } from 'react-redux'
 
+import ArticleActions from 'store/redux/articles'
 import { ArticleForm } from '../Forms'
 
-export class ArticleCreation extends PureComponent {
-    static propTypes = {}
+const mapDispatchToProps = dispatch => ({
+    createArticle: fields => dispatch(ArticleActions.createArticle(fields)),
+})
 
-    state = {}
+class ArticleCreation extends PureComponent {
+    handleSubmitForm = fields => {
+        // if
+        // console.log(fields)
+        const excerpt = fields.content.substring(0, 300)
+        this.props.createArticle({ ...fields, excerpt })
+    }
 
     render() {
-        const {} = this.props
-
-        return (
-            <div>
-                <ArticleForm />
-            </div>
-        )
+        return <ArticleForm formTitle="Create an article" onSubmit={this.handleSubmitForm} />
     }
 }
+
+export default connect(
+    null,
+    mapDispatchToProps,
+)(ArticleCreation)

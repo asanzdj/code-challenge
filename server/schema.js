@@ -31,6 +31,27 @@ const articleType = new GraphQLObjectType({
   }),
 });
 
+const articleArgs = {
+  author: {
+    type: new GraphQLNonNull(GraphQLString),
+  },
+  content: {
+    type: new GraphQLNonNull(GraphQLString),
+  },
+  excerpt: {
+    type: new GraphQLNonNull(GraphQLString),
+  },
+  published: {
+    type: new GraphQLNonNull(GraphQLBoolean),
+  },
+  tags: {
+    type: new GraphQLList(GraphQLString),
+  },
+  title: {
+    type: new GraphQLNonNull(GraphQLString),
+  },
+};
+
 const Query = new GraphQLObjectType({
   name: 'Query',
   description: 'This is a root query',
@@ -71,6 +92,13 @@ const Mutation = new GraphQLObjectType({
         // Returns the article deleted is it's found
         // It is needed to check is id exists
         return Types.ObjectId.isValid(id) ? db.Article.findByIdAndRemove(id) : null;
+      },
+    },
+    createArticle: {
+      type: articleType,
+      args: articleArgs,
+      resolve(root, args) {
+        return db.Article.create({ ...args });
       },
     },
   }),

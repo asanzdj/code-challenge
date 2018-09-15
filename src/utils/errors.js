@@ -11,4 +11,8 @@ export default {
         title: 'Ooppps... Something went wrong',
         text: 'An error has ocurred while deleting this article. Please, try it later.',
     },
+    CREATE_ARTICLE: {
+        title: 'Ooppps... Something went wrong',
+        text: 'An error has ocurred while creating the article. Please, try it later.',
+    },
 }

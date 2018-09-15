@@ -6,6 +6,9 @@ import { Label } from './Label'
 
 const StyledInput = styled.textarea`
     resize: none;
+    width: 100%;
+    min-height: 10rem;
+
     &:focus {
         outline-offset: -2px;
         outline: ${props => props.theme.primary} auto 0.5rem;
@@ -19,14 +22,10 @@ export class TextAreaField extends PureComponent {
         type: string,
         onChange: func.isRequired,
         value: oneOfType([string, number]).isRequired,
-        rows: number,
-        cols: number,
     }
 
     static defaultProps = {
         type: 'text',
-        rows: 10,
-        cols: 50,
     }
 
     render() {

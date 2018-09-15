@@ -52,3 +52,18 @@ export function* deleteArticle(api, { id }) {
 
     yield put(GlobalActions.hideLoading())
 }
+
+export function* createArticle(api, { fields }) {
+    yield put(GlobalActions.showLoading())
+
+    yield delay(500)
+    const article = yield call(api.createArticle, fields)
+
+    if (article) {
+        yield put(push(`/articles/view/${article.id}`))
+    } else {
+        yield put(GlobalActions.setError(ERRORS.CREATE_ARTICLE))
+    }
+
+    yield put(GlobalActions.hideLoading())
+}
