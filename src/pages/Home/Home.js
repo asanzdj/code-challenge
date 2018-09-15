@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 
 import { Card, IconButton } from 'components'
 import ArticleActions from 'store/redux/articles'
@@ -22,6 +23,7 @@ const StyledFloatedButton = styled.div`
 
 const mapDispatchToProps = dispatch => ({
     getArticles: () => dispatch(ArticleActions.getArticles()),
+    navigate: path => dispatch(push(path)),
 })
 
 const mapStateToProps = state => ({
@@ -38,6 +40,7 @@ class Home extends PureComponent {
                 title: PropTypes.string,
             }),
         ),
+        navigate: PropTypes.func,
     }
 
     componentWillMount() {
@@ -45,18 +48,18 @@ class Home extends PureComponent {
     }
 
     render() {
-        const { history, articles } = this.props
+        const { history, articles, navigate } = this.props
 
         return (
             <div className="flex justify-content-center flex-wrap">
                 <StyledHomeTitle>Consult our articles</StyledHomeTitle>
                 <div className="flex justify-content-center flex-wrap">
                     {articles.map(article => (
-                        <Card item={article} key={article.id} onCardDetail={() => history.push(`/${article.id}`)} />
+                        <Card item={article} key={article.id} onCardDetail={() => navigate(`/articles/view/${article.id}`)} />
                     ))}
                 </div>
                 <StyledFloatedButton>
-                    <IconButton>add</IconButton>
+                    <IconButton onClick={() => navigate('/articles/add')}>add</IconButton>
                 </StyledFloatedButton>
             </div>
         )

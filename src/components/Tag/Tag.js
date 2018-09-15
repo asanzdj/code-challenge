@@ -17,18 +17,24 @@ class Tag extends PureComponent {
         text: PropTypes.string.isRequired,
         background: PropTypes.string,
         color: PropTypes.string,
-        editable: PropTypes.bool,
+        removable: PropTypes.bool,
         onRemove: PropTypes.func,
         marginRight: PropTypes.string,
     }
 
+    static defaultProps = {
+        removable: false,
+    }
+
     render() {
-        const { text, editable, onRemove, theme } = this.props
+        const { text, removable, onRemove, theme } = this.props
 
         return (
-            <StyledTag>
+            <StyledTag className="flex justify-content-between align-items-center">
                 <span>{text}</span>
-                {editable && <Icon color={theme.colors.white} onClick={onRemove} />}
+                <Icon size="1.3rem" cursor="pointer">
+                    close
+                </Icon>
             </StyledTag>
         )
     }
