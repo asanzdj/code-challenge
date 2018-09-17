@@ -14,6 +14,7 @@ const StyledModalContainer = styled.div`
     right: 0;
     top: 0;
     width: 100%;
+    ${props => props.theme.mixins.flexCenterCenter};
 `
 
 const StyledModal = styled.div`
@@ -22,6 +23,7 @@ const StyledModal = styled.div`
     min-height: 20rem;
     min-width: 70%;
     padding: 1rem;
+    ${props => props.theme.mixins.flexColumnBetween};
 `
 
 class Modal extends PureComponent {
@@ -36,13 +38,11 @@ class Modal extends PureComponent {
         const { title, theme, onClose, children, isOpen } = this.props
 
         return isOpen ? (
-            <StyledModalContainer className="flex justify-content-center align-items-center">
-                <StyledModal className="flex flex-column justify-content-between">
-                    <div className="text-right">
-                        <Icon color={theme.colors.greyDark} cursor="pointer" onClick={onClose}>
-                            close
-                        </Icon>
-                    </div>
+            <StyledModalContainer>
+                <StyledModal>
+                    <Icon color={theme.colors.greyDark} cursor="pointer" align="right" onClick={onClose}>
+                        close
+                    </Icon>
                     {title && <ModalHeader title={title} />}
                     {children}
                 </StyledModal>

@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 
 import store from 'store'
-import { theme } from 'theme/theme'
+import { theme } from 'theme'
 import { Layout } from './layout'
 
 export default () => (

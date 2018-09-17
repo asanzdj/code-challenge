@@ -7,6 +7,7 @@ import { TextField, TextAreaField, CheckboxField, TagsField, Button } from 'comp
 
 const StyledFormWrapper = styled.div`
     width: 100%;
+    ${props => props.theme.mixins.flexCenterCenter};
 
     form {
         min-width: 50rem;
@@ -14,9 +15,13 @@ const StyledFormWrapper = styled.div`
 `
 
 const StyledFormTitle = styled.h1`
-    text-transform: uppercase;
     letter-spacing: 0.2rem;
+    text-align: center;
+    text-transform: uppercase;
     width: 100%;
+`
+const StyledSubmitWrapper = styled.div`
+    ${props => props.theme.mixins.flexCenterEnd};
 `
 
 export class ArticleForm extends PureComponent {
@@ -99,8 +104,8 @@ export class ArticleForm extends PureComponent {
         const { formTitle } = this.props
 
         return (
-            <StyledFormWrapper className="flex justify-content-center flex-wrap">
-                {formTitle && <StyledFormTitle className="text-center">{formTitle}</StyledFormTitle>}
+            <StyledFormWrapper>
+                {formTitle && <StyledFormTitle>{formTitle}</StyledFormTitle>}
 
                 <form>
                     <TextField label="Title:" value={title} id="title" name="title" onChange={e => this.handleFieldChange(e, 'title')} error={errors['title']} />
@@ -109,11 +114,11 @@ export class ArticleForm extends PureComponent {
                     <CheckboxField label="Is published?" value={published} id="published" name="published" onChange={this.handleCheckboxChange} />
                     <TagsField label="Tags:" id="tags" name="tags" tags={tags} onRemove={this.handleRemoveTag} onAddTag={this.handleAddTag} />
 
-                    <div className="flex justify-content-end">
+                    <StyledSubmitWrapper>
                         <Button color="secondary" onClick={this.handleSubmit}>
                             Send
                         </Button>
-                    </div>
+                    </StyledSubmitWrapper>
                 </form>
             </StyledFormWrapper>
         )

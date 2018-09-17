@@ -4,7 +4,6 @@ export const initialState = {
     isOpen: false,
 }
 
-// Types and Action Creators
 const { Types, Creators } = createActions(
     {
         clean: null,
@@ -17,7 +16,6 @@ const { Types, Creators } = createActions(
 )
 export const ModalTypes = Types
 
-// Reducers and Handlers
 export const handlers = {
     [Types.CLEAN]: () => ({ ...initialState }),
     [Types.SHOW_MODAL]: (state = initialState) => ({ ...state, isOpen: true }),

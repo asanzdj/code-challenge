@@ -12,6 +12,7 @@ const StyledCard = styled.div`
     max-width: 33rem;
     min-height: 37rem;
     margin: 1rem;
+    ${props => props.theme.mixins.flexColumnBetween};
 `
 
 export class Card extends PureComponent {
@@ -27,7 +28,7 @@ export class Card extends PureComponent {
     render() {
         const { item, onCardDetail } = this.props
         return (
-            <StyledCard className="flex justify-content-between flex-column">
+            <StyledCard>
                 <CardHeader title={item.title} onCardDetail={onCardDetail} />
                 <CardBody description={item.excerpt} />
                 <CardFooter author={item.author} id={item.id} />

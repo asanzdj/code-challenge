@@ -1,9 +1,17 @@
 import React, { PureComponent } from 'react'
 import { string, func, array } from 'prop-types'
+import styled from 'styled-components'
 
 import { Label } from './Label'
 import { TextField } from './TextField'
 import { Tag, IconButton } from 'components'
+
+const StyledTagsInputWrapper = styled.div`
+    ${props => props.theme.mixins.flexCenterStart};
+`
+const StyledTagsWrapper = styled.div`
+    ${props => props.theme.mixins.flexCenterStart};
+`
 
 export class TagsField extends PureComponent {
     static propTypes = {
@@ -35,14 +43,14 @@ export class TagsField extends PureComponent {
         return (
             <div>
                 {label && <Label>{label}</Label>}
-                <div className="flex align-items-center">
+                <StyledTagsInputWrapper>
                     <TextField value={value} onChange={this.handleInputChange} name="tag" id="tag" />
                     <IconButton height="3rem" width="2rem" marginLeft="1rem" onClick={this.handleAdd}>
                         add
                     </IconButton>
-                </div>
+                </StyledTagsInputWrapper>
 
-                <div className="flex justify-content-start flex-wrap">{tags && tags.map((tag, index) => <Tag key={index} removable text={tag} onRemove={onRemove} />)}</div>
+                <StyledTagsWrapper>{tags && tags.map((tag, index) => <Tag key={index} removable text={tag} onRemove={onRemove} />)}</StyledTagsWrapper>
             </div>
         )
     }

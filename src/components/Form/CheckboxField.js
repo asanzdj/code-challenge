@@ -4,6 +4,10 @@ import styled from 'styled-components'
 
 import { Label } from './Label'
 
+const StyledCheckboxWrapper = styled.div`
+    ${props => props.theme.mixins.flexCenterStart};
+`
+
 const StyledInput = styled.input`
     &:focus {
         outline-offset: -2px;
@@ -27,10 +31,10 @@ export class CheckboxField extends PureComponent {
         const { label, value, ...otherProps } = this.props
 
         return (
-            <div className="flex align-items-center">
+            <StyledCheckboxWrapper>
                 <StyledInput {...otherProps} type="checkbox" checked={value} />
                 {label && <Label>{label}</Label>}
-            </div>
+            </StyledCheckboxWrapper>
         )
     }
 }

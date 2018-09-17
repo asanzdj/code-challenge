@@ -89,8 +89,6 @@ const Mutation = new GraphQLObjectType({
         },
       },
       resolve(root, { id }) {
-        // Returns the article deleted is it's found
-        // It is needed to check is id exists
         return Types.ObjectId.isValid(id) ? db.Article.findByIdAndRemove(id) : null;
       },
     },
@@ -110,8 +108,6 @@ const Mutation = new GraphQLObjectType({
         },
       },
       resolve(root, args) {
-        // Returns the article updated is it's found
-        // It is needed to check is id exists
         return Types.ObjectId.isValid(args.id) ? db.Article.findByIdAndUpdate(args.id, args, { new: true }) : null;
       },
     },

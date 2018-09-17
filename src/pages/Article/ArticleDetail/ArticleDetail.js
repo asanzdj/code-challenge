@@ -7,7 +7,6 @@ import { push } from 'connected-react-router'
 
 import ArticleActions from 'store/redux/articles'
 import { Icon, Paper, Tag, Modal, ModalBody, ModalFooter, Button } from 'components'
-import './ArticleDetail.css'
 
 const StyledPublication = styled.p`
     color: ${props => props.theme.colors.grey};
@@ -18,17 +17,41 @@ const StyledTitle = styled.h1`
     color: ${props => props.theme.colors.greyDark};
     margin-top: 2rem;
     text-transform: uppercase;
+    text-align: center;
 `
 const StyledSubtitle = styled.h3`
     color: ${props => props.theme.colors.grey};
     font-size: 1.5rem;
     margin-top: 1rem;
+    texta-lign: right;
 `
 const StyledContent = styled.p`
     color: ${props => props.theme.colors.greyDark};
     margin-top: 2rem;
     font-size: 1.4rem;
     line-height: 2.2rem;
+    text-align: justify;
+`
+
+const StyledTagsWrapper = styled.div`
+    ${props => props.theme.mixins.flexCenterAround};
+`
+
+const StyledArticleWrapper = styled.div`
+    ${props => props.theme.mixins.flexCenterCenter};
+    @media (max-width: 667px) {
+        width: 90%;
+    }
+    @media (min-width: 668px) {
+        width: 70%;
+    }
+    @media (min-width: 1500px) {
+        width: 60%;
+    }
+`
+
+const StyledArticleState = styled.div`
+    text-align: right;
 `
 
 const mapStateToProps = state => ({
@@ -82,12 +105,12 @@ class ArticleDetail extends PureComponent {
         const text = this.isPublished() ? 'Published' : 'Not published'
 
         return (
-            <div className="text-right">
+            <StyledArticleState>
                 <Icon color={color} marginRight="1rem" cursor="pointer" size="4.3rem">
                     {icon}
                 </Icon>
                 <StyledPublication>{text}</StyledPublication>
-            </div>
+            </StyledArticleState>
         )
     }
 
@@ -95,14 +118,14 @@ class ArticleDetail extends PureComponent {
         const { theme } = this.props
 
         return (
-            <div className="flex justify-content-around flex-wrap">
+            <StyledTagsWrapper>
                 {this.props.article.tags.map(
                     (tag, index) =>
                         tag && tag !== null && tag !== 'null' && tag !== 'undefined' ? (
                             <Tag key={index} text={tag} background={theme.colors.teal300} color={theme.colors.white} marginRight="2rem" />
                         ) : null,
                 )}
-            </div>
+            </StyledTagsWrapper>
         )
     }
 
@@ -151,19 +174,19 @@ class ArticleDetail extends PureComponent {
         const { article } = this.props
 
         return !isEmpty(article) ? (
-            <div className="flex justify-content-center">
+            <StyledArticleWrapper>
                 {this.renderDeleteModal()}
-                <Paper padding="1rem 2rem" margin="2rem 0" className="Article">
+                <Paper padding="1rem 2rem" margin="2rem 0">
                     {this.renderActionsHeader()}
                     {this.renderPublishedFlag()}
                     <div>
-                        <StyledTitle className="text-center">{article.title}</StyledTitle>
-                        <StyledSubtitle className="text-right">{article.author}</StyledSubtitle>
-                        <StyledContent className="text-justify">{article.content}</StyledContent>
+                        <StyledTitle>{article.title}</StyledTitle>
+                        <StyledSubtitle>{article.author}</StyledSubtitle>
+                        <StyledContent>{article.content}</StyledContent>
                     </div>
                     {this.renderTags()}
                 </Paper>
-            </div>
+            </StyledArticleWrapper>
         ) : null
     }
 }

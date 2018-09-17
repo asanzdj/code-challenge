@@ -6,6 +6,7 @@ import { Icon } from 'components'
 
 const StyledCardHeader = styled.div`
     border-bottom: 1px solid ${props => props.theme.colors.orange};
+    ${props => props.theme.mixins.flexCenterBetween};
 `
 
 const StyledCardTitle = styled.h3`
@@ -24,9 +25,9 @@ class CardHeader extends PureComponent {
         const { title, onCardDetail, theme } = this.props
 
         return (
-            <StyledCardHeader className="flex justify-content-between">
+            <StyledCardHeader>
                 <StyledCardTitle>· {title} ·</StyledCardTitle>
-                <Icon className="material-icons" onClick={onCardDetail} color={theme.colors.orange} cursor="pointer">
+                <Icon onClick={onCardDetail} color={theme.colors.orange} cursor="pointer">
                     keyboard_arrow_right
                 </Icon>
             </StyledCardHeader>

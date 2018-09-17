@@ -3,6 +3,7 @@ import { oneOf, string, any, bool } from 'prop-types'
 import styled from 'styled-components'
 
 const StyledButton = styled.button`
+    ${props => props.theme.mixins.flexCenterCenter};
     background: ${props => props.theme.colors[props.color]};
     border-radius: 2px;
     border: none;
@@ -44,12 +45,8 @@ export class Button extends PureComponent {
     }
 
     render() {
-        const { children, className, ...otherProps } = this.props
+        const { children, ...otherProps } = this.props
 
-        return (
-            <StyledButton {...otherProps} className={`flex justify-content-center align-items-center ${className}`}>
-                {children}
-            </StyledButton>
-        )
+        return <StyledButton {...otherProps}>{children}</StyledButton>
     }
 }

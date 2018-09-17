@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const StyledCardFooter = styled.div`
     color: ${props => props.theme.colors.grey};
+    ${props => props.theme.mixins.flexCenterBetween};
 `
 
 const StyledCardAuthor = styled.p`
@@ -25,17 +26,10 @@ export default class CardFooter extends PureComponent {
         const { author, id } = this.props
 
         return (
-            <StyledCardFooter className="flex justify-content-between align-items-center flex-wrap">
+            <StyledCardFooter>
                 <StyledCardAuthor>{author}</StyledCardAuthor>
                 <StyledCardRef>Id: {id}</StyledCardRef>
             </StyledCardFooter>
         )
     }
 }
-
-// const StyledCardSubTitle = styled.p`
-//     color: ${props => props.theme.colors.grey};
-//     font-size: 1.2rem;
-//     padding-left: 1rem;
-// `
-// {subtitle && <StyledCardSubTitle>Author: {subtitle}</StyledCardSubTitle>}

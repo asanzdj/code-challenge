@@ -5,7 +5,6 @@ export const initialState = {
     articles: [],
 }
 
-// Types and Action Creators
 const { Types, Creators } = createActions(
     {
         clean: null,
@@ -24,7 +23,6 @@ const { Types, Creators } = createActions(
 )
 export const ArticleTypes = Types
 
-// Reducers and Handlers
 export const handlers = {
     [Types.CLEAN]: () => ({ ...initialState }),
     [Types.SET_ARTICLES]: (state = initialState, { articles }) => ({ ...state, articles }),

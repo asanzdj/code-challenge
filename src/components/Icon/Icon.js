@@ -5,12 +5,13 @@ import styled from 'styled-components'
 const StyledIcon = styled.i`
     color: ${props => props.color};
     cursor: ${props => props.cursor};
-    margin-bottom: ${props => props.marginBottom};
     font-size: ${props => props.size} !important;
+    margin-bottom: ${props => props.marginBottom};
     margin-left: ${props => props.marginLeft};
     margin-right: ${props => props.marginRight};
     margin-top: ${props => props.marginTop};
     margin: ${props => props.margin};
+    text-align: ${props => props.align};
 `
 
 export class Icon extends PureComponent {

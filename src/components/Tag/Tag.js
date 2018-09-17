@@ -10,6 +10,7 @@ const StyledTag = styled.div`
     margin-right: ${props => props.marginRight || '2rem'};
     margin-top: ${props => props.marginRight || '0.5rem'};
     padding: 0.5rem 1rem;
+    ${props => props.theme.mixins.flexCenterBetween};
 `
 
 class Tag extends PureComponent {
@@ -30,7 +31,7 @@ class Tag extends PureComponent {
         const { text, removable, onRemove } = this.props
 
         return (
-            <StyledTag className="flex justify-content-between align-items-center">
+            <StyledTag>
                 <span>{text}</span>
                 {removable && (
                     <Icon size="1.3rem" cursor="pointer" onClick={() => onRemove(text)}>

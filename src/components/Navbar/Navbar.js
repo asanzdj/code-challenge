@@ -9,6 +9,7 @@ const StyledNavbar = styled.div`
     padding: 1rem;
     top: 0;
     width: 100%;
+    ${props => props.theme.mixins.flexCenterBetween};
 `
 
 const Logo = styled.div`
@@ -18,6 +19,7 @@ const Logo = styled.div`
     font-size: 1.6rem;
     cursor: pointer;
     color: ${props => props.theme.primary};
+    ${props => props.theme.mixins.flexCenterCenter};
 `
 
 export class Navbar extends PureComponent {
@@ -28,8 +30,8 @@ export class Navbar extends PureComponent {
     render() {
         const { navigate } = this.props
         return (
-            <StyledNavbar className="flex justify-content-between align-items-center">
-                <Logo className="flex justify-content-center align-items-center">
+            <StyledNavbar>
+                <Logo>
                     <h1 onClick={() => navigate('/')}>A</h1>
                 </Logo>
             </StyledNavbar>

@@ -6,6 +6,7 @@ const StyledModalBody = styled.div`
     font-size: 1.2rem;
     margin-right: 1rem;
     margin-top: 1rem;
+    ${props => props.theme.mixins.flexCenterEnd};
 `
 
 export class ModalFooter extends PureComponent {
@@ -16,6 +17,6 @@ export class ModalFooter extends PureComponent {
     render() {
         const { children } = this.props
 
-        return <StyledModalBody className="flex justify-content-end">{children}</StyledModalBody>
+        return <StyledModalBody>{children}</StyledModalBody>
     }
 }

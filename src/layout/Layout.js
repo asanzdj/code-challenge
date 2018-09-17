@@ -8,16 +8,16 @@ import Router from 'routes'
 import ModalActions from 'store/redux/modal'
 import GlobalActions from 'store/redux/global'
 import { Footer, Navbar, Spinner, Modal, ModalBody, ModalFooter, Button } from 'components'
-import './Layout.css'
 
 const StyledLayout = styled.div`
     height: 100vh;
+    ${props => props.theme.mixins.flexCenterCenter};
 `
 const StyledContentWrapper = styled.div`
     min-height: 90vh;
+    overflow: ${props => (props.loading ? 'hidden' : 'auto')};
     padding: 1rem 1rem;
     width: 100%;
-    overflow: ${props => (props.loading ? 'hidden' : 'auto')};
 `
 
 const mapStateToProps = state => ({
@@ -46,7 +46,7 @@ export class Layout extends PureComponent {
         const { loading, isModalOpen, closeModal, error, cleanError, navigate } = this.props
 
         return (
-            <StyledLayout className="flex flex-wrap">
+            <StyledLayout>
                 <Spinner active={loading} />
                 {error && (
                     <Modal isOpen={true} onClose={cleanError} title={error.title}>
@@ -60,7 +60,7 @@ export class Layout extends PureComponent {
                 )}
                 <Modal isOpen={isModalOpen} onClose={closeModal} />
                 <Navbar navigate={navigate} />
-                <StyledContentWrapper className="ContentWrapper">
+                <StyledContentWrapper>
                     <Router />
                 </StyledContentWrapper>
                 <Footer />

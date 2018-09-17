@@ -5,14 +5,11 @@ export const initialState = {
     error: null,
 }
 
-// Types and Action Creators
 const { Types, Creators } = createActions(
     {
         clean: null,
-        // Loading
         showLoading: null,
         hideLoading: null,
-        // Errors
         setError: ['error'],
         cleanError: null,
         showError: ['key'],
@@ -23,7 +20,6 @@ const { Types, Creators } = createActions(
 )
 export const GlobalTypes = Types
 
-// Reducers and Handlers
 export const handlers = {
     [Types.CLEAN]: () => ({ ...initialState }),
     [Types.SHOW_LOADING]: (state = initialState) => ({ ...state, loading: true }),
