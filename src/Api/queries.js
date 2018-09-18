@@ -7,13 +7,15 @@ export const ARTICLES_QUERY = `{
   }
 }`
 
-export const ARTICLE_QUERY = id => `{
-  article(id: "${id}") {
-    author
-    content
-    published
-    tags
-    id
-    title
+export const ARTICLE_QUERY = `
+  query($id: String!) {
+    article(id: $id) {
+      author
+      content
+      published
+      tags
+      id
+      title
+    }
   }
-}`
+`

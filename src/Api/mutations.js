@@ -1,20 +1,27 @@
-export const DELETE_ARTICLE_MUTATION = id => `
-    mutation {
-        deleteArticle(id: "${id}") {
+export const DELETE_ARTICLE_MUTATION = `
+    mutation($id: String!) {
+        deleteArticle(id: $id) {
             id
         }
     }
 `
 
-export const CREATE_ARTICLE_MUTATION = ({ title, author, content, published, tags, excerpt }) => `
-    mutation {
+export const CREATE_ARTICLE_MUTATION = `
+    mutation(
+        $title: String!
+        $author: String!
+        $content: String!
+        $published: Boolean!
+        $tags: [String]
+        $excerpt: String!
+    ) {
         createArticle(
-            title: "${title}", 
-            author: "${author}", 
-            content: "${content}",
-            published: ${published},
-            tags: "${tags}",
-            excerpt: "${excerpt}"
+            title: $title
+            author: $author
+            content: $content
+            published: $published
+            tags: $tags
+            excerpt: $excerpt
         ) {
             id
         }

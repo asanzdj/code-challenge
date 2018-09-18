@@ -38,16 +38,8 @@ const StyledTagsWrapper = styled.div`
 `
 
 const StyledArticleWrapper = styled.div`
-    ${props => props.theme.mixins.flexCenterCenter};
-    @media (max-width: 667px) {
-        width: 90%;
-    }
-    @media (min-width: 668px) {
-        width: 70%;
-    }
-    @media (min-width: 1500px) {
-        width: 60%;
-    }
+    ${props => props.theme.mixins.flexCenter};
+    width: 100%;
 `
 
 const StyledArticleState = styled.div`

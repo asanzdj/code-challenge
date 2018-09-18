@@ -12,6 +12,7 @@ const StyledPaper = styled.div`
     margin-right: ${props => props.marginRight};
     margin-top: ${props => props.marginTop};
     margin: ${props => props.margin};
+    min-width: 90%;
 `
 
 export class Paper extends PureComponent {
