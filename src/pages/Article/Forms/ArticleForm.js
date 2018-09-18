@@ -32,6 +32,7 @@ export class ArticleForm extends PureComponent {
             published: bool,
             tags: array,
             title: string,
+            id: string,
         }),
         formTitle: string,
     }

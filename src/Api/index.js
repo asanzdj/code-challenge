@@ -10,7 +10,7 @@ const createArticle = fields => {
     return request(CREATE_ARTICLE_MUTATION, { ...fields }).then(response => response.data.createArticle, error => error)
 }
 const updateArticle = fields => {
-    return request(UPDATE_ARTICLE_MUTATION(fields)).then(response => response.data.updateArticle, error => error)
+    return request(UPDATE_ARTICLE_MUTATION, { ...fields }).then(response => response.data.updateArticle, error => error)
 }
 
 export default {

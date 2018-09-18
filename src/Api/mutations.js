@@ -28,16 +28,24 @@ export const CREATE_ARTICLE_MUTATION = `
     }
 `
 
-export const UPDATE_ARTICLE_MUTATION = ({ title, author, content, published, tags, excerpt, id }) => `
-    mutation {
+export const UPDATE_ARTICLE_MUTATION = `
+    mutation(
+        $title: String!
+        $author: String!
+        $content: String!
+        $published: Boolean!
+        $tags: [String]
+        $excerpt: String!
+        $id: String!
+    ) {
         updateArticle(
-            title: "${title}", 
-            author: "${author}", 
-            content: "${content}",
-            published: ${published},
-            tags: "${tags}",
-            excerpt: "${excerpt}"
-            id: "${id}"
+            title: $title
+            author: $author
+            content: $content
+            published: $published
+            tags: $tags
+            excerpt: $excerpt
+            id: $id
         ) {
             id
         }

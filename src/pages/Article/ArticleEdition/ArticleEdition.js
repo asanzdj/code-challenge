@@ -24,7 +24,7 @@ class ArticleEdition extends PureComponent {
 
     handleSubmitForm = fields => {
         const excerpt = fields.content.substring(0, 300)
-        this.props.updateArticle({ ...fields, excerpt, id: this.articleId })
+        this.props.updateArticle({ ...fields, excerpt })
     }
 
     render() {
