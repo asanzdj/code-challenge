@@ -1,10 +1,10 @@
-import GlobalActions, { GlobalTypes } from 'store/redux/global'
+import GlobalActions, { GlobalTypes, reducer as GlobalReducer } from 'store/redux/global'
 import configureStore from 'redux-mock-store'
 
 const middlewares = []
 const mockStore = configureStore(middlewares)
 
-describe('actionsCreators', () => {
+describe('globalActionsCreators', () => {
     it('should create a show loading action', () => {
         const store = mockStore({ loading: false })
 
@@ -63,5 +63,72 @@ describe('actionsCreators', () => {
         store.dispatch(GlobalActions.showError(key))
 
         expect(store.getActions()).toEqual([expectedPayload])
+    })
+})
+
+describe('globalReducers', () => {
+    it('should clean store to initial state when clean action is dispatched', () => {
+        const initialState = {
+            error: null,
+            loading: false,
+        }
+        const reducer = GlobalReducer(initialState, { type: GlobalTypes.CLEAN })
+
+        expect(reducer).toEqual(initialState)
+    })
+    it('should set true in loading when show loading action is dispatched', () => {
+        const initialState = {
+            error: null,
+            loading: false,
+        }
+
+        const reducer = GlobalReducer(initialState, { type: GlobalTypes.SHOW_LOADING })
+        const expectedState = {
+            error: null,
+            loading: true,
+        }
+
+        expect(reducer).toEqual(expectedState)
+    })
+    it('should set false in loading when hide loading action is dispatched', () => {
+        const initialState = {
+            error: null,
+            loading: true,
+        }
+
+        const reducer = GlobalReducer(initialState, { type: GlobalTypes.HIDE_LOADING })
+        const expectedState = {
+            error: null,
+            loading: false,
+        }
+
+        expect(reducer).toEqual(expectedState)
+    })
+    it('should set error message when set error action is dispatched', () => {
+        const initialState = {
+            error: null,
+            loading: false,
+        }
+        const error = 'error'
+        const reducer = GlobalReducer(initialState, { type: GlobalTypes.SET_ERROR, error })
+        const expectedState = {
+            error,
+            loading: false,
+        }
+
+        expect(reducer).toEqual(expectedState)
+    })
+    it('should set null when clean error action is dispatched', () => {
+        const initialState = {
+            error: 'error',
+            loading: false,
+        }
+        const reducer = GlobalReducer(initialState, { type: GlobalTypes.CLEAN_ERROR })
+        const expectedState = {
+            error: null,
+            loading: false,
+        }
+
+        expect(reducer).toEqual(expectedState)
     })
 })

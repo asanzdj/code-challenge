@@ -1,10 +1,11 @@
-import ArticleActions, { ArticleTypes } from 'store/redux/articles'
 import configureStore from 'redux-mock-store'
+
+import ArticleActions, { ArticleTypes, reducer as ArticleReducer } from 'store/redux/articles'
 
 const middlewares = []
 const mockStore = configureStore(middlewares)
 
-describe('actionsCreators', () => {
+describe('articleActionsCreators', () => {
     it('should create a set article action', () => {
         const store = mockStore({ article: {} })
         const article = {
@@ -108,5 +109,57 @@ describe('actionsCreators', () => {
         store.dispatch(ArticleActions.updateArticle())
 
         expect(store.getActions()).toEqual([expectedPayload])
+    })
+})
+
+describe('articleReducers', () => {
+    it('should clean store to initial state when clean action is dispatched', () => {
+        const initialState = {
+            articles: [],
+            article: {},
+        }
+        const reducer = ArticleReducer(initialState, { type: ArticleTypes.CLEAN })
+
+        expect(reducer).toEqual(initialState)
+    })
+    it('should set articles in state when set articles action is dispatched', () => {
+        const initialState = {
+            articles: [],
+            article: {},
+        }
+        const articles = [
+            {
+                id: '1',
+                title: 'title',
+            },
+            {
+                id: '2',
+                title: 'title',
+            },
+        ]
+        const reducer = ArticleReducer(initialState, { type: ArticleTypes.SET_ARTICLES, articles })
+        const expectedState = {
+            article: {},
+            articles,
+        }
+
+        expect(reducer).toEqual(expectedState)
+    })
+    it('should set article in state when set article action is dispatched', () => {
+        const initialState = {
+            articles: [],
+            article: {},
+        }
+        const article = {
+            id: '1',
+            title: 'title',
+        }
+        const reducer = ArticleReducer(initialState, { type: ArticleTypes.SET_ARTICLE, article })
+        const expectedState = {
+            article,
+            articles: [],
+        }
+
+        expect(reducer).toEqual(expectedState)
     })
 })
