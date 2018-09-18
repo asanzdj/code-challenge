@@ -1,5 +1,6 @@
-import ModalActions, { ModalTypes, reducer as ModalReducer } from 'store/redux/modal'
 import configureStore from 'redux-mock-store'
+
+import ModalActions, { ModalTypes, reducer as ModalReducer } from 'store/redux/modal'
 
 const middlewares = []
 const mockStore = configureStore(middlewares)

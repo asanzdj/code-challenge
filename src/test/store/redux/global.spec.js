@@ -1,5 +1,6 @@
-import GlobalActions, { GlobalTypes, reducer as GlobalReducer } from 'store/redux/global'
 import configureStore from 'redux-mock-store'
+
+import GlobalActions, { GlobalTypes, reducer as GlobalReducer } from 'store/redux/global'
 
 const middlewares = []
 const mockStore = configureStore(middlewares)
