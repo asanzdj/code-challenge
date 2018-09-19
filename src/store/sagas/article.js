@@ -10,7 +10,7 @@ import { delay } from 'utils/sagas'
 export function* getArticles(api) {
     yield put(GlobalActions.showLoading())
 
-    // yield delay(500)
+    yield delay(500)
     const articles = yield call(api.getArticles)
 
     if (articles) {
