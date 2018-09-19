@@ -1,6 +1,8 @@
 import configureStore from 'redux-mock-store'
 
 import ArticleActions, { ArticleTypes, reducer as ArticleReducer } from 'store/redux/articles'
+import { article as fakeArticle, articles as fakeArticles } from 'Api/fakeApi/mocks'
+import fakeApi from 'Api/fakeApi'
 
 const middlewares = []
 const mockStore = configureStore(middlewares)
@@ -161,5 +163,28 @@ describe('articleReducers', () => {
         }
 
         expect(reducer).toEqual(expectedState)
+    })
+})
+
+describe('async actions', () => {
+    it('calls get article api action and returns an article', () => {
+        const article = fakeApi.getArticle(fakeArticle.id)
+
+        expect(article).toEqual(fakeArticle)
+    })
+    it('calls get articles api action and returns an array of articles', () => {
+        const articles = fakeApi.getArticles()
+
+        expect(articles).toEqual(fakeArticles)
+    })
+    it('calls delete api action and returns deleted article', () => {
+        const article = fakeApi.deleteArticle()
+
+        expect(article).toEqual(fakeArticle)
+    })
+    it('calls update api action and returns updated article', () => {
+        const article = fakeApi.updateArticle()
+
+        expect(article).toEqual(fakeArticle)
     })
 })
